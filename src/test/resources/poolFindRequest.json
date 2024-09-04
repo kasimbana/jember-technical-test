@@ -1,0 +1,12 @@
+{
+  "dcsPoolIds": [
+    "POOL:2e66b934-c589-384f-abcc-97f6120e4afa",
+    "POOL:0c6fd997-c271-3ac8-abd9-ebab55212eda"
+  ],
+  "filterCriteria": {
+    "authenticationMethods": [
+      "REMOTE",
+      "RFID"
+    ]
+  }
+}

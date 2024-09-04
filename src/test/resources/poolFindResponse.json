@@ -1,0 +1,47 @@
+[
+  {
+    "dcsPoolId": "POOL:001232cf-8608-3939-8e70-7e3beec16eec",
+    "incomingPoolId": "DEESWS0008",
+    "open24h": true,
+    "access": "PUBLIC",
+    "poolLocationType": "ONSTREET",
+    "poolLocations": [
+      {
+        "city": "München",
+        "countryCode": "DE",
+        "houseNumber": "3a",
+        "state": "Bayern",
+        "street": "Hauptstraße",
+        "type": "ENTRY",
+        "zipCode": "81678",
+        "coordinates": {
+          "latitude": 49.138744,
+          "longitude": 11.87634
+        }
+      }
+    ],
+    "chargingStations": [
+      {
+        "chargePoints": [
+          {
+            "connectors": [
+              {
+                "plugType": "CHADEMO",
+                "powerLevel": 22
+              }
+            ],
+            "dcsCpId": "CHARGE_POINT:200a4e22-b996-3cd0-8505-7cf6f5690714",
+            "incomingCpId": "+49*809*010*150850",
+            "dynamicInfoAvailable": true,
+            "isonormedId": true
+          }
+        ],
+        "dcsCsId": "CHARGING_STATION:5e296c55-fe2e-313a-bf19-08f5bf35d6b6",
+        "incomingCsId": "SL01577",
+        "chargingStationAuthMethods": [
+          "REMOTE"
+        ]
+      }
+    ]
+  }
+]
