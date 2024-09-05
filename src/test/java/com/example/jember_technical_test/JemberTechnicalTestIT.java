@@ -2,9 +2,6 @@ package com.example.jember_technical_test;
 
 import com.example.jember_technical_test.dto.ErrorDto;
 import com.example.jember_technical_test.dto.PoolFindRequestBody;
-import com.example.jember_technical_test.dto.payload.FilterCriteria;
-import com.example.jember_technical_test.entity.AuthMethod;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,6 +30,8 @@ class JemberTechnicalTestIT {
 	private final ObjectMapper mapper = new ObjectMapper();
 	private String expectedJson;
 	private final String poolFindUrl = "/pool-find";
+	private static final String AUTH_TOKEN_HEADER_NAME = "Subscription-Key";
+	private static final String AUTH_TOKEN = "test-token";
 
 	@BeforeEach
 	public void setup() throws IOException {
@@ -47,6 +46,7 @@ class JemberTechnicalTestIT {
 		//when
 		mvc.perform(
 				post(poolFindUrl)
+						.header(AUTH_TOKEN_HEADER_NAME, AUTH_TOKEN)
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(requestBody)
 				)
@@ -64,6 +64,7 @@ class JemberTechnicalTestIT {
 		//when
 		mvc.perform(
 				post(poolFindUrl)
+						.header(AUTH_TOKEN_HEADER_NAME, AUTH_TOKEN)
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(mapper.writeValueAsString(request))
 				)
@@ -81,10 +82,26 @@ class JemberTechnicalTestIT {
 		//when
 		mvc.perform(
 				post(poolFindUrl)
+						.header(AUTH_TOKEN_HEADER_NAME, AUTH_TOKEN)
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(mapper.writeValueAsString(request))
 				)
 		//then
 				.andExpect(content().json("[]"));
+	}
+
+	@Test
+	public void givenRequestWithNoSubscriptionKeyShouldReturnUnauthorized() throws Exception {
+		//given
+		String requestBody = new String(Files.readAllBytes(Paths.get("src/test/resources/poolFindRequest.json")));
+
+		//when
+		mvc.perform(
+						post(poolFindUrl)
+								.contentType(MediaType.APPLICATION_JSON)
+								.content(requestBody)
+				)
+		//then
+				.andExpect(status().isUnauthorized());
 	}
 }
